@@ -10,6 +10,8 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.AutomousGoAndReturn;
+import frc.robot.commands.GoUpChargedStation;
+import frc.robot.commands.MoveArm;
 import frc.robot.commands.OnArm;
 import frc.robot.commands.autonomusCommandGroup;
 import frc.robot.commands.driveForwardDT;
@@ -78,7 +80,8 @@ public class Robot extends TimedRobot {
     
     autonomusCommandGroup a = new autonomusCommandGroup();
     AutomousGoAndReturn a1 = new AutomousGoAndReturn();
-
+    OnArm a2 = new OnArm();
+    GoUpChargedStation a3 = new GoUpChargedStation();
     a1.schedule();
 
 
@@ -104,10 +107,11 @@ public class Robot extends TimedRobot {
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove
     // this line or comment it out.
-    driveRobot t = new driveRobot();
+    MoveArm t1 = new MoveArm();
+    driveRobot t2 = new driveRobot();
 
-    t.schedule();
-
+    t1.schedule();
+    t2.schedule();
   }
 
   /** This function is called periodically during operator control. */

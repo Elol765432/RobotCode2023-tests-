@@ -4,35 +4,23 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
 
-public class TurnRightDriveTrain extends CommandBase {
-  /** Creates a new TurnRight. */
-  Timer t;
-  boolean finished = false;
-  public TurnRightDriveTrain() {
-    t = new Timer();
-    addRequirements(Robot.getRobotContainer().getDriveTrain());
+public class MoveArm extends CommandBase {
+  /** Creates a new MoveArm. */
+  public MoveArm() {
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {
-    t.start();
-  }
+  public void initialize() {}
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    Robot.getRobotContainer().getDriveTrain().turnRight();
-
-    if(t.get()>=0.4){
-      Robot.getRobotContainer().getDriveTrain().stop();
-      finished = true;
-    }
+    Robot.getRobotContainer().getArm().onArmController(Robot.getRobotContainer().getOI().getPilot().getRightTrigger(), Robot.getRobotContainer().getOI().getPilot().getLeftTrigger());
   }
 
   // Called once the command ends or is interrupted.
@@ -42,6 +30,6 @@ public class TurnRightDriveTrain extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return finished;
+    return false;
   }
 }

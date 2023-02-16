@@ -11,16 +11,17 @@ public class RobotMap {
 
 public static final double OFFSET = 0.05;
 
-public static final int driveTrainPorts[] = {10, 11, 12, 13,45 ,50};
+public static final int driveTrainPorts[] = {10, 11, 12, 13,40, 41, 45 ,50};
 
 public static final TypeOfMotor chassisMotor[] = {TypeOfMotor.CAN_SPARK_BRUSHLESS, TypeOfMotor.CAN_SPARK_BRUSHLESS};
 
 public static final int pilotPort = 0;
 
-public static final double chassisSpeedL = 0.15;
+public static final double chassisSpeedL = 0.6;
 
-public static final double chassisSpeedR = 0.155;
+public static final double chassisSpeedR = 0.62;
 
+public static final double armSpeed = 0.4;
 
  
 }

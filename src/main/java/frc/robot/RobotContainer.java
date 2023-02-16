@@ -40,9 +40,7 @@ public class RobotContainer {
      oi = new OI();
      intake = new Intake();
      arm = new Arm();
-
-
-    configureButtonBindings();
+     //configureButtonBindings();
   }
 
   public driveTrain getDriveTrain() {
@@ -64,7 +62,9 @@ public class RobotContainer {
   }
   
 
-  private void configureButtonBindings() {}
+  private void configureButtonBindings() {
+    oi.configureButtonBindings();
+  }
 
 
   public Command getAutonomousCommand() {

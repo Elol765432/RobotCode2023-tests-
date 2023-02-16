@@ -16,8 +16,8 @@ public class Arm extends SubsystemBase {
   TecbotSpeedController m5;
   TecbotSpeedController m6;
   public Arm() {
-    m5 = new TecbotSpeedController(RobotMap.driveTrainPorts [4], RobotMap.chassisMotor[0]);
-    m6 = new TecbotSpeedController(RobotMap.driveTrainPorts [5], RobotMap.chassisMotor[0]);
+    m5 = new TecbotSpeedController(RobotMap.driveTrainPorts[6], RobotMap.chassisMotor[0]);
+    m6 = new TecbotSpeedController(RobotMap.driveTrainPorts[7], RobotMap.chassisMotor[0]);
 
     m5.getCANSparkMax().setIdleMode(IdleMode.kBrake);
     m6.getCANSparkMax().setIdleMode(IdleMode.kBrake);
@@ -29,23 +29,17 @@ public class Arm extends SubsystemBase {
   }
 
   public void onArm(){
-    m5.set(RobotMap.chassisSpeedL);
-    m6.set(-RobotMap.chassisSpeedL);
+    m5.set(RobotMap.armSpeed);
+    m6.set(-RobotMap.armSpeed);
   }
 
   public void stopArm(){
     m5.set(0);
     m6.set(0);
   }
-  /*
-  public void onArm(Trigger button) {
-    m5.set(RobotMap.chassisSpeedL);
-    m6.set(-RobotMap.chassisSpeedL);
+
+  public void onArmController(double RT, double LT){
+    m5.set((RT-LT)*0.5);
+    m6.set((RT-LT)*-0.5);
   }
-  
-  public void stopArm(Trigger button1){
-    m5.set(0);
-    m6.set(0);
-  }
-  */
 }
