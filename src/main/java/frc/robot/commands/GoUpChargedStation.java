@@ -15,6 +15,6 @@ public class GoUpChargedStation extends SequentialCommandGroup {
   public GoUpChargedStation() {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(new onMotors(), new WaitCommand(4), new OffMotors(),new WaitCommand(1),new turnLeftDriveTrain(), new WaitCommand(1), new onMotors(), new WaitCommand(2.8),  new OffMotors(), new WaitCommand(1), new TurnRightDriveTrain(), new WaitCommand(1),new onMotors(), new WaitCommand(3), new OffMotors(), new WaitCommand(1), new turnLeftDriveTrain(), new turnLeftDriveTrain(), new WaitCommand(1), new onMotors(), new WaitCommand(3), new OffMotors());
+    addCommands(new OnArm(), new WaitCommand(0.38), new OffArm(), new WaitCommand(1.5),new IntakeOff(),new WaitCommand(1),new OnArmF(), new WaitCommand(.3), new OffArm(),new WaitCommand(1),new onMotors(), new WaitCommand(.95), new OffMotors(),new WaitCommand(0.5),new IntakeOn(),new WaitCommand(0.5), new turnLeftDriveTrain(),new WaitCommand(0.5),new onMotors(), new WaitCommand(.65), new OffMotors(), new WaitCommand(0.5), new TurnRightDriveTrain(), new WaitCommand(0.75), new DriveRobotBackwards(), new WaitCommand(1.27), new OffMotors());
   }
 }

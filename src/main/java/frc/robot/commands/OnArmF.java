@@ -7,9 +7,9 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
 
-public class OffArm extends CommandBase {
-  /** Creates a new OffArm. */
-  public OffArm() {
+public class OnArmF extends CommandBase {
+  /** Creates a new OnArmF. */
+  public OnArmF() {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(Robot.getRobotContainer().getArm());
   }
@@ -21,7 +21,7 @@ public class OffArm extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    Robot.getRobotContainer().getArm().stopArm();
+    Robot.getRobotContainer().getArm().onArmF();
   }
 
   // Called once the command ends or is interrupted.

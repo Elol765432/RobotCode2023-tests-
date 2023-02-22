@@ -9,12 +9,15 @@ import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.RobotMap;
+import frc.robot.resources.RobotConfigurator;
 
 public class Intake extends SubsystemBase {
   DoubleSolenoid piston;
   /** Creates a new Intake. */
   public Intake() {
-    piston = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, 1, 2);
+    piston = RobotConfigurator.buildDoubleSolenoid(RobotMap.SolenoidPort);
+  
   }
   
   public void doIn(){
@@ -25,6 +28,10 @@ public class Intake extends SubsystemBase {
   public void doOut(){
     piston.set(Value.kReverse);
     System.out.println("Off");
+  }
+
+  public void intakeTogggle() {
+    piston.toggle();
   }
 
   @Override

@@ -21,7 +21,15 @@ public static final double chassisSpeedL = 0.6;
 
 public static final double chassisSpeedR = 0.62;
 
-public static final double armSpeed = 0.4;
+public static final double armSpeedB = 0.20;
+
+public static final double armspeedF = 0.20;
+
+public static final double teleop_armspeed = 0.3;
+
+public static final int PCM_1_PORT = 7;
+
+public static final int SolenoidPort[] = {PCM_1_PORT, 5, 10};
 
  
 }

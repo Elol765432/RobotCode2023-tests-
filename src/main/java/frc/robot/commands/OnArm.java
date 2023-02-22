@@ -25,7 +25,7 @@ public class OnArm extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-   Robot.getRobotContainer().getArm().onArm();
+   Robot.getRobotContainer().getArm().onArmB();
   }
 
 
@@ -36,6 +36,6 @@ public class OnArm extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return true;
   }
 }

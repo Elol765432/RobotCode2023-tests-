@@ -29,7 +29,7 @@ public class TurnRightDriveTrain extends CommandBase {
   public void execute() {
     Robot.getRobotContainer().getDriveTrain().turnRight();
 
-    if(t.get()>=0.4){
+    if(t.get()>=0.36){
       Robot.getRobotContainer().getDriveTrain().stop();
       finished = true;
     }

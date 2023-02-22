@@ -28,9 +28,14 @@ public class Arm extends SubsystemBase {
     // This method will be called once per scheduler run
   }
 
-  public void onArm(){
-    m5.set(RobotMap.armSpeed);
-    m6.set(-RobotMap.armSpeed);
+  public void onArmB(){
+    m5.set(RobotMap.armSpeedB);
+    m6.set(-RobotMap.armSpeedB);
+  }
+
+  public void onArmF(){
+    m5.set(-RobotMap.armspeedF);
+    m6.set(RobotMap.armspeedF);
   }
 
   public void stopArm(){
@@ -39,7 +44,16 @@ public class Arm extends SubsystemBase {
   }
 
   public void onArmController(double RT, double LT){
-    m5.set((RT-LT)*0.5);
-    m6.set((RT-LT)*-0.5);
+    m5.set((RT-LT)*RobotMap.teleop_armspeed);
+    m6.set((RT-LT)*-RobotMap.teleop_armspeed);
   }
+
+
+public void keepArm(int side){
+  int[] sideArray = {1, -1};
+  m5.set(-0.07*sideArray[side]);
+  m6.set(0.07*sideArray[side]);
 }
+
+}
+

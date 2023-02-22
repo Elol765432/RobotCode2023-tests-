@@ -21,6 +21,7 @@ public class MoveArm extends CommandBase {
   @Override
   public void execute() {
     Robot.getRobotContainer().getArm().onArmController(Robot.getRobotContainer().getOI().getPilot().getRightTrigger(), Robot.getRobotContainer().getOI().getPilot().getLeftTrigger());
+    System.out.println(Robot.getRobotContainer().getOI().getPilot().getLeftTrigger());
   }
 
   // Called once the command ends or is interrupted.

@@ -37,7 +37,6 @@ public class RobotContainer {
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
      drivetrain = new driveTrain();
-     oi = new OI();
      intake = new Intake();
      arm = new Arm();
      //configureButtonBindings();
@@ -49,8 +48,8 @@ public class RobotContainer {
 
   }
 
-  public OI getOI(){
-    return oi;
+  public static OI getOI(){
+    return OI.getInstance();
   }
 
   public Intake getIntake(){
@@ -62,8 +61,8 @@ public class RobotContainer {
   }
   
 
-  private void configureButtonBindings() {
-    oi.configureButtonBindings();
+  public void configureButtonBindings() {
+    OI.getInstance().configureButtonBindings();
   }
 
 

@@ -4,24 +4,35 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
 
-public class OffArm extends CommandBase {
-  /** Creates a new OffArm. */
-  public OffArm() {
+public class ReturnRobot extends CommandBase {
+  /** Creates a new Return. */
+  Timer t;
+  boolean finished = false;
+  public ReturnRobot() {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(Robot.getRobotContainer().getArm());
+    t = new Timer();
+    addRequirements(Robot.getRobotContainer().getDriveTrain());
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    t.start();
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    Robot.getRobotContainer().getArm().stopArm();
+    Robot.getRobotContainer().getDriveTrain().turnRight();
+
+    if(t.get()>=0.135){
+      Robot.getRobotContainer().getDriveTrain().stop();
+      finished = true;
+    }
   }
 
   // Called once the command ends or is interrupted.
@@ -31,6 +42,6 @@ public class OffArm extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return true;
+    return finished;
   }
 }

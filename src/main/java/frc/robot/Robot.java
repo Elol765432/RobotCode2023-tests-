@@ -10,9 +10,14 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.AutomousGoAndReturn;
+import frc.robot.commands.AutonomousRoute;
 import frc.robot.commands.GoUpChargedStation;
+import frc.robot.commands.IntakeOff;
+import frc.robot.commands.IntakeOn;
 import frc.robot.commands.MoveArm;
 import frc.robot.commands.OnArm;
+import frc.robot.commands.OpenAndCloseClaw;
+import frc.robot.commands.ReturnRobot;
 import frc.robot.commands.autonomusCommandGroup;
 import frc.robot.commands.driveForwardDT;
 import frc.robot.commands.driveRobot;
@@ -41,6 +46,7 @@ public class Robot extends TimedRobot {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     robotcontainer = new RobotContainer();
+    robotcontainer.configureButtonBindings();
    
   }
   public static RobotContainer getRobotContainer() {
@@ -82,7 +88,14 @@ public class Robot extends TimedRobot {
     AutomousGoAndReturn a1 = new AutomousGoAndReturn();
     OnArm a2 = new OnArm();
     GoUpChargedStation a3 = new GoUpChargedStation();
-    a1.schedule();
+    IntakeOn a4 = new IntakeOn();
+    IntakeOff a5 = new IntakeOff();
+    OpenAndCloseClaw a6 = new OpenAndCloseClaw();
+    AutonomousRoute a7 = new AutonomousRoute();
+    ReturnRobot a8 = new ReturnRobot();
+    turnLeftDriveTrain a9 = new turnLeftDriveTrain();
+
+    a3.schedule();
 
 
     if (m_autonomousCommand != null) {

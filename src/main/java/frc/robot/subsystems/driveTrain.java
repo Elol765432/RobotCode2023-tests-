@@ -45,17 +45,22 @@ public class driveTrain extends SubsystemBase {
   }
 
   public void driveForward(){
-  System.out.println("drive forward");
    m1.set(-RobotMap.chassisSpeedL);
    m2.set(-RobotMap.chassisSpeedL); 
    m3.set(RobotMap.chassisSpeedR);
    m4.set(RobotMap.chassisSpeedR); 
   }
 
+  public void driveBackwards(){
+     m1.set(RobotMap.chassisSpeedL);
+     m2.set(RobotMap.chassisSpeedL); 
+     m3.set(-RobotMap.chassisSpeedR);
+     m4.set(-RobotMap.chassisSpeedR); 
+    }
+  
   
 
   public void stop(){
-    System.out.println("stop");
     m1.set(0);
     m2.set(0);
     m3.set(0);
@@ -67,7 +72,6 @@ public class driveTrain extends SubsystemBase {
 //return t.get() >= sec;
  //}
   public void turnLeft(){
-    System.out.println("turn");
     m1.set(RobotMap.chassisSpeedL);
     m2.set(RobotMap.chassisSpeedL);
     m3.set(RobotMap.chassisSpeedR);
