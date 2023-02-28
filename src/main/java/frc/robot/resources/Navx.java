@@ -10,7 +10,7 @@ public class Navx {
     private double rate;
     private double pitch;
     private double acceleration;
-    private AHRS ahrs;
+    private static AHRS ahrs;
     private double last_world_linear_accel_x;
     private double last_world_linear_accel_y;
     private boolean collisionDetected = false;
@@ -89,10 +89,6 @@ public class Navx {
         currentJerkY = curr_world_linear_accel_y - last_world_linear_accel_y;
         last_world_linear_accel_y = curr_world_linear_accel_y;
         return currentJerkY;
-    }
-
-    public double getYaw() {
-        return ahrs.getYaw();
     }
 
     public double getCollisionX() {

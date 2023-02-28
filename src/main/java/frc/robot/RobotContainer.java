@@ -7,6 +7,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.OnArmWithEncoders;
 import frc.robot.commands.autonomusCommandGroup;
 import frc.robot.commands.onMotors;
 import frc.robot.commands.turnLeftDriveTrain;
@@ -39,6 +40,7 @@ public class RobotContainer {
      drivetrain = new driveTrain();
      intake = new Intake();
      arm = new Arm();
+  
      //configureButtonBindings();
   }
 
@@ -71,8 +73,7 @@ public class RobotContainer {
     return m_autoCommand;
   }
 
-
-
+ 
   
 
 }

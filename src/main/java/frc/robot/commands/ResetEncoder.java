@@ -4,37 +4,27 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
-import frc.robot.RobotContainer;
-import frc.robot.subsystems.driveTrain;
 
-
-public class onMotors extends CommandBase {
-  boolean finished = false;
-  /** Creates a new onMotors. */
-  public onMotors() {
+public class ResetEncoder extends CommandBase {
+  /** Creates a new ResetEncoder. */
+  public ResetEncoder() {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(Robot.getRobotContainer().getDriveTrain());
-  
-    }
+    addRequirements(Robot.getRobotContainer().getArm());
+  }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    Robot.getRobotContainer().getArm().resetEncoderArm();
+
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    Robot.getRobotContainer().getDriveTrain().driveForwardWithEncoders();
-
-    if(Robot.getRobotContainer().getDriveTrain().getEncoder()>=8){
-      finished = true;
-    }
   }
-
 
   // Called once the command ends or is interrupted.
   @Override
@@ -43,6 +33,6 @@ public class onMotors extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return finished;
+    return true;
   }
 }

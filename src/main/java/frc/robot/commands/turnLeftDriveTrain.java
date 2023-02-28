@@ -10,18 +10,15 @@ import frc.robot.Robot;
 
 public class turnLeftDriveTrain extends CommandBase {
   /** Creates a new trunLeft. */
-  Timer t2;
-  boolean finished = false;
+
   public turnLeftDriveTrain() {
     // Use addRequirements() here to declare subsystem dependencies.
-    t2 = new Timer();
     addRequirements(Robot.getRobotContainer().getDriveTrain());
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    t2.start();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -29,10 +26,6 @@ public class turnLeftDriveTrain extends CommandBase {
   public void execute() { 
     Robot.getRobotContainer().getDriveTrain().turnLeft();
     
-    if(t2.get()>=0.32){
-      Robot.getRobotContainer().getDriveTrain().stop();
-      finished = true;
-    }
    }
    
 
@@ -43,6 +36,6 @@ public class turnLeftDriveTrain extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return finished;
+    return false;
   }
 }

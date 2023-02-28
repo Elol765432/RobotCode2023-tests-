@@ -4,24 +4,40 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj2.command.button.Button;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
+import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.resources.TecbotSpeedController;
+import edu.wpi.first.wpilibj.Encoder;
+
+import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkMax.IdleMode;
 
 public class Arm extends SubsystemBase {
   /** Creates a new Arm. */
   TecbotSpeedController m5;
   TecbotSpeedController m6;
+
+  private RelativeEncoder armEncoderL, armEncoderR;
+
+  private RelativeEncoder armEncoder;
+
+
   public Arm() {
-    m5 = new TecbotSpeedController(RobotMap.driveTrainPorts[6], RobotMap.chassisMotor[0]);
-    m6 = new TecbotSpeedController(RobotMap.driveTrainPorts[7], RobotMap.chassisMotor[0]);
+    m5 = new TecbotSpeedController(RobotMap.armPorts[0], RobotMap.chassisMotor[0]);
+    m6 = new TecbotSpeedController(RobotMap.armPorts[1], RobotMap.chassisMotor[0]);
 
     m5.getCANSparkMax().setIdleMode(IdleMode.kBrake);
     m6.getCANSparkMax().setIdleMode(IdleMode.kBrake);
+
+    armEncoderL = m5.getCANSparkMax().getEncoder();
+    armEncoderR = m6.getCANSparkMax().getEncoder();
+    
   } 
+
 
   @Override
   public void periodic() {
@@ -54,6 +70,45 @@ public void keepArm(int side){
   m5.set(-0.07*sideArray[side]);
   m6.set(0.07*sideArray[side]);
 }
+
+public void getArmEncoder(){
+  SmartDashboard.getNumber("Arm Encoder: ", armEncoderR.getPosition());
+  System.out.println(armEncoderR.getPosition());
+}
+
+public void resetEncoderArm(){
+  SmartDashboard.putNumber("Arm position: ", armEncoderR.getPosition());
+  armEncoderL.setPosition(0);
+  armEncoderR.setPosition(0);
+  System.out.println(armEncoderR.getPosition());
+}
+
+public void OnArmBackwardE(){
+  SmartDashboard.putNumber("Arm encoder: ", armEncoderR.getPosition());
+  m5.set(RobotMap.armSpeedE);
+  m6.set(-RobotMap.armSpeedE);
+
+  if(armEncoderR.getPosition()<=-2.5){
+    System.out.println(armEncoderR.getPosition());
+    m5.set(0);
+    m6.set(0);
+  }
+}
+
+public void OnArmForward(){
+  m5.set(-RobotMap.armSpeedE);
+  m6.set(RobotMap.armSpeedE);
+
+  if(armEncoderR.getPosition()>=2.5){
+    m5.set(0);
+    m6.set(0);
+  }
+}
+
+public void printEncoder(){
+  System.out.println(armEncoderL);
+}
+
 
 }
 

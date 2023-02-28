@@ -8,21 +8,30 @@ import frc.robot.resources.TecbotController;
 import frc.robot.resources.TecbotController.ButtonType;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotMap;
+import frc.robot.commands.ChangeToSpeed;
+import frc.robot.commands.ChangeToTorque;
+import frc.robot.commands.EncoderArmBackwards;
+import frc.robot.commands.EncoderArmForward;
 import frc.robot.commands.IntakeOff;
 import frc.robot.commands.IntakeOn;
 import frc.robot.commands.OffArm;
 import frc.robot.commands.OffArmT;
 import frc.robot.commands.OnArm;
 import frc.robot.commands.OnArmT;
+import frc.robot.commands.ResetEncoder;
+import frc.robot.commands.ResetEncoderDt;
 
 /** Add your docs here. */
 public class OI {
    public static OI instance;
  private TecbotController pilot;
+ private TecbotController copilot;
  
 
     public OI(){
       pilot = new TecbotController(RobotMap.pilotPort, TecbotConstants.CONTROLLER_TYPE_PILOT);
+      copilot = new TecbotController(RobotMap.copilotPort, TecbotConstants.CONTROLLER_TYPE_COPILOT);
+
    }
 
    public void configureButtonBindings(){
@@ -31,9 +40,11 @@ public class OI {
 
       pilot.whenPressed(TecbotController.ButtonType.A, new IntakeOn());
       pilot.whenPressed(TecbotController.ButtonType.B, new IntakeOff());
-      pilot.whenPressed(TecbotController.ButtonType.POV_DOWN, new OffArm());
-      pilot.whenPressed(TecbotController.ButtonType.POV_LEFT, new OnArmT());
-      pilot.whenPressed(TecbotController.ButtonType.POV_RIGHT, new OffArmT());
+      pilot.whenPressed(TecbotController.ButtonType.X, new ChangeToSpeed());
+      pilot.whenPressed(TecbotController.ButtonType.Y, new ChangeToTorque());
+      
+      copilot.whenPressed(TecbotController.ButtonType.A, new EncoderArmBackwards());
+      copilot.whenPressed(TecbotController.ButtonType.B, new EncoderArmForward());
    }
 
    public static OI getInstance() {
@@ -47,9 +58,8 @@ public class OI {
       return pilot;
    }
 
-     
- 
-
-
+   public TecbotController getCopilot(){
+      return copilot;
+   }
 
 }

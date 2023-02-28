@@ -16,7 +16,7 @@ public class Intake extends SubsystemBase {
   DoubleSolenoid piston;
   /** Creates a new Intake. */
   public Intake() {
-    piston = RobotConfigurator.buildDoubleSolenoid(RobotMap.SolenoidPort);
+    piston = RobotConfigurator.buildDoubleSolenoid(RobotMap.SolenoidPortClaw); 
   
   }
   
@@ -38,4 +38,5 @@ public class Intake extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
   }
+  
 }

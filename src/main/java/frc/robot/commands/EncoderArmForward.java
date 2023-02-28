@@ -5,16 +5,15 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import edu.wpi.first.wpilibj2.command.WaitCommand;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class OpenAndCloseClaw extends SequentialCommandGroup {
-  /** Creates a new OpenAndCloseClaw. */
-  public OpenAndCloseClaw() {
+public class EncoderArmForward extends SequentialCommandGroup {
+  /** Creates a new EncoderArmForward. */
+  public EncoderArmForward() {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(new WaitCommand(3), new IntakeOn(), new WaitCommand(5), new IntakeOff());
+    addCommands(new ResetEncoder(),new OnArmWithEncoderF());
   }
 }
