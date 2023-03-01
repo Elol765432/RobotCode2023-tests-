@@ -6,10 +6,15 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
+import frc.robot.resources.TecbotConstants;
+
+
 
 public class DriveRobotBackwards extends CommandBase {
   /** Creates a new DriveRobotBackwards. */
+  boolean finished = false;
   public DriveRobotBackwards() {
+    
     addRequirements(Robot.getRobotContainer().getDriveTrain());
     // Use addRequirements() here to declare subsystem dependencies.
   }
@@ -22,6 +27,11 @@ public class DriveRobotBackwards extends CommandBase {
   @Override
   public void execute() {
     Robot.getRobotContainer().getDriveTrain().driveBackwards();
+    double distance = TecbotConstants.setpointBakcwards - Robot.getRobotContainer().getDriveTrain().getDriveTrainFeet();
+    
+    if(distance*TecbotConstants.kP <= 0.03){
+      finished = true;
+    }
   }
 
   // Called once the command ends or is interrupted.
@@ -31,6 +41,7 @@ public class DriveRobotBackwards extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return true;
+    return finished;
+
   }
 }

@@ -7,9 +7,11 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
+import frc.robot.resources.TecbotConstants;
 
 public class turnLeftDriveTrain extends CommandBase {
   /** Creates a new trunLeft. */
+  boolean finished = false;
 
   public turnLeftDriveTrain() {
     // Use addRequirements() here to declare subsystem dependencies.
@@ -25,7 +27,10 @@ public class turnLeftDriveTrain extends CommandBase {
   @Override
   public void execute() { 
     Robot.getRobotContainer().getDriveTrain().turnLeft();
+    double distance = TecbotConstants.setpointTurn - Robot.getRobotContainer().getDriveTrain().getDriveTrainFeet();
     
+    if(distance*TecbotConstants.kP <= 0.03);
+    finished = true;
    }
    
 
@@ -36,6 +41,6 @@ public class turnLeftDriveTrain extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return finished;
   }
 }

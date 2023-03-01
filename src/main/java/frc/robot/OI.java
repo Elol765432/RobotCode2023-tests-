@@ -12,6 +12,7 @@ import frc.robot.commands.ChangeToSpeed;
 import frc.robot.commands.ChangeToTorque;
 import frc.robot.commands.EncoderArmBackwards;
 import frc.robot.commands.EncoderArmForward;
+import frc.robot.commands.ExtendArm;
 import frc.robot.commands.IntakeOff;
 import frc.robot.commands.IntakeOn;
 import frc.robot.commands.OffArm;
@@ -20,6 +21,7 @@ import frc.robot.commands.OnArm;
 import frc.robot.commands.OnArmT;
 import frc.robot.commands.ResetEncoder;
 import frc.robot.commands.ResetEncoderDt;
+import frc.robot.commands.RetractArm;
 
 /** Add your docs here. */
 public class OI {
@@ -40,11 +42,13 @@ public class OI {
 
       pilot.whenPressed(TecbotController.ButtonType.A, new IntakeOn());
       pilot.whenPressed(TecbotController.ButtonType.B, new IntakeOff());
-      pilot.whenPressed(TecbotController.ButtonType.X, new ChangeToSpeed());
-      pilot.whenPressed(TecbotController.ButtonType.Y, new ChangeToTorque());
+      pilot.whenPressed(TecbotController.ButtonType.X, new ExtendArm());
+      pilot.whenPressed(TecbotController.ButtonType.Y, new RetractArm());
       
-      copilot.whenPressed(TecbotController.ButtonType.A, new EncoderArmBackwards());
-      copilot.whenPressed(TecbotController.ButtonType.B, new EncoderArmForward());
+      copilot.whenPressed(TecbotController.ButtonType.A, new OnArmT());
+      copilot.whenPressed(TecbotController.ButtonType.B, new OffArm());
+      copilot.whileHeld(TecbotController.ButtonType.X, new ChangeToSpeed());
+      copilot.whileHeld(TecbotController.ButtonType.Y, new ChangeToTorque());
    }
 
    public static OI getInstance() {

@@ -7,13 +7,12 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
+import frc.robot.resources.TecbotConstants;
 
 public class TurnRightDriveTrain extends CommandBase {
   /** Creates a new TurnRight. */
-  Timer t;
   boolean finished = false;
   public TurnRightDriveTrain() {
-    t = new Timer();
     addRequirements(Robot.getRobotContainer().getDriveTrain());
     // Use addRequirements() here to declare subsystem dependencies.
   }
@@ -21,16 +20,16 @@ public class TurnRightDriveTrain extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    t.start();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
     Robot.getRobotContainer().getDriveTrain().turnRight();
-
-    if(t.get()>=0.36){
-      Robot.getRobotContainer().getDriveTrain().stop();
+    
+    double distance = TecbotConstants.setpointTurnR - Robot.getRobotContainer().getDriveTrain().getDriveTrainFeet();
+    
+    if(distance*TecbotConstants.kP <= 0.03){
       finished = true;
     }
   }

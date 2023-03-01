@@ -7,10 +7,10 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
 
-public class OnArmT extends CommandBase {
-  /** Creates a new OnArmT. */
-  public OnArmT() {
-    addRequirements(Robot.getRobotContainer().getArm());
+public class DriveBackwards extends CommandBase {
+  /** Creates a new DriveBackwars. */
+  public DriveBackwards() {
+    addRequirements(Robot.getRobotContainer().getDriveTrain());
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
@@ -21,7 +21,7 @@ public class OnArmT extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    Robot.getRobotContainer().getArm().onArm();;
+    Robot.getRobotContainer().getDriveTrain().driveBackwardsTime();
   }
 
   // Called once the command ends or is interrupted.

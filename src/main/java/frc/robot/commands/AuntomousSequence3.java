@@ -6,16 +6,15 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
-import frc.robot.Robot;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class AutonomousSequence1 extends SequentialCommandGroup {
-  /** Creates a new AutonomousSequence1. */
-  public AutonomousSequence1() {
+public class AuntomousSequence3 extends SequentialCommandGroup {
+  /** Creates a new AuntomousSequence3. */
+  public AuntomousSequence3() {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(new ResetEncoderDt(), new onMotors(), new WaitCommand(0.5), new ResetEncoderDt(), new turnLeftDriveTrain());
+    addCommands(new DriveBackwards(), new WaitCommand(0.3), new OffMotors(),new ResetEncoderDt(), new onMotors(), new WaitCommand(0.5), new ResetEncoderDt(), new DriveRobotBackwards());
   }
 }

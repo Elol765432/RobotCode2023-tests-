@@ -191,4 +191,12 @@ public class TecbotConstants {
 
         public static int LED_STRIP_PWM_PORT = 8;
         public static int LED_STRIP_LENGTH = 180;
+
+        public static final double kDriveTick2Feet = 1.0 * 4 * Math.PI / 72;
+        public static final double setpoint = 8;
+        public static final double kP = 0.5;
+        public static final double setpointTurn = 2.4;
+        public static final double setpointTurnR = 14.258;
+        public static final double setpointBakcwards = 6.6;
+        public static final double setpointShort = 5;
 }

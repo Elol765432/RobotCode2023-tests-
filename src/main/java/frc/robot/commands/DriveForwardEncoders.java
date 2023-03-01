@@ -6,12 +6,15 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
+import frc.robot.resources.TecbotConstants;
 
-public class OnArmT extends CommandBase {
-  /** Creates a new OnArmT. */
-  public OnArmT() {
-    addRequirements(Robot.getRobotContainer().getArm());
+public class DriveForwardEncoders extends CommandBase {
+  /** Creates a new DriveForwardEncoders. */
+  boolean finished = false;
+
+  public DriveForwardEncoders() {
     // Use addRequirements() here to declare subsystem dependencies.
+    addRequirements(Robot.getRobotContainer().getDriveTrain());
   }
 
   // Called when the command is initially scheduled.
@@ -21,7 +24,12 @@ public class OnArmT extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    Robot.getRobotContainer().getArm().onArm();;
+    Robot.getRobotContainer().getDriveTrain().driveForwardWithEncodersShort();
+    double distance = TecbotConstants.setpointShort - Robot.getRobotContainer().getDriveTrain().getDriveTrainFeet();
+    
+    if(distance<=0.01){
+      finished = true;
+    }
   }
 
   // Called once the command ends or is interrupted.
@@ -31,6 +39,6 @@ public class OnArmT extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return true;
+    return false;
   }
 }

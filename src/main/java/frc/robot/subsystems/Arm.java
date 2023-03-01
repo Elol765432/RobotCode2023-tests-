@@ -10,8 +10,11 @@ import edu.wpi.first.wpilibj2.command.button.Button;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
+import frc.robot.resources.RobotConfigurator;
 import frc.robot.resources.TecbotSpeedController;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkMax.IdleMode;
@@ -25,6 +28,8 @@ public class Arm extends SubsystemBase {
 
   private RelativeEncoder armEncoder;
 
+  DoubleSolenoid arm, extention;
+
 
   public Arm() {
     m5 = new TecbotSpeedController(RobotMap.armPorts[0], RobotMap.chassisMotor[0]);
@@ -36,12 +41,30 @@ public class Arm extends SubsystemBase {
     armEncoderL = m5.getCANSparkMax().getEncoder();
     armEncoderR = m6.getCANSparkMax().getEncoder();
     
+   arm = RobotConfigurator.buildDoubleSolenoid(RobotMap.SolenoidPortArm);
+   extention = RobotConfigurator.buildDoubleSolenoid(RobotMap.SolenoidPortExtentionArm);
   } 
 
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+  }
+
+  public void onArm(){
+    arm.set(Value.kForward);
+  }
+
+  public void offArm(){
+    arm.set(Value.kReverse);
+  }
+
+  public void extendArm(){
+    extention.set(Value.kForward);
+  }
+
+  public void retractArm(){
+    extention.set(Value.kReverse);
   }
 
   public void onArmB(){

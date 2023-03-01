@@ -21,9 +21,9 @@ public static final int pilotPort = 0;
 
 public static final int copilotPort = 1;
 
-public static final double chassisSpeedL = 0.6;
+public static final double chassisSpeedL = 0.3;
 
-public static final double chassisSpeedR = 0.6;
+public static final double chassisSpeedR = 0.3;
 
 public static final double armSpeedB = 0.50;
 
@@ -38,6 +38,10 @@ public static final int PCM_1_PORT = 7;
 public static final int SolenoidPortClaw[] = {PCM_1_PORT, 5, 10};
 
 public static final int SolenoidPortTransmition[] = {PCM_1_PORT, 1, 14};
+
+public static final int SolenoidPortArm[] = {PCM_1_PORT, 2, 13};
+
+public static final int SolenoidPortExtentionArm[] = {PCM_1_PORT, 3, 12};
 
 public static final int kGyroPort = 0;
 }

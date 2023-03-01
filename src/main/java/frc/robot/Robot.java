@@ -109,8 +109,8 @@ public class Robot extends TimedRobot {
     TurnLeftDTE a14 = new TurnLeftDTE();
     AutonomousSequence1 a15 = new AutonomousSequence1();
     
-    Robot.getRobotContainer().getDriveTrain().resetEncoderDt();
-   
+    xd.schedule();
+
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
     }
@@ -120,7 +120,6 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during autonomous. */
   @Override
   public void autonomousPeriodic() {
-    Robot.getRobotContainer().getDriveTrain().turnLeft();
   }
 
   @Override

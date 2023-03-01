@@ -24,6 +24,7 @@ import frc.robot.commands.onMotors;
 import frc.robot.commands.turnLeftDriveTrain;
 import frc.robot.resources.Navx;
 import frc.robot.resources.RobotConfigurator;
+import frc.robot.resources.TecbotConstants;
 import frc.robot.resources.TecbotSpeedController;
 
 public class driveTrain extends SubsystemBase {
@@ -32,15 +33,10 @@ public class driveTrain extends SubsystemBase {
   TecbotSpeedController m2;
   TecbotSpeedController m3;
   TecbotSpeedController m4; 
-  Timer t1;
+  
+
 
   RelativeEncoder driveTrainEncoderL1, driveTrainEncoderL2, driveTrainEncoderR1, driveTrainEncoderR2;
-  
-  double kDriveTick2Feet = 1.0 * 4 * Math.PI / 72;
-  double setpoint = 9.16;
-  double kP = 1;
-  double setpointTurn = 14.32;
-  double setpointTurnR = 14.258;
 
   DoubleSolenoid transmition;
 
@@ -59,7 +55,6 @@ public class driveTrain extends SubsystemBase {
   m2.getCANSparkMax().setIdleMode(IdleMode.kBrake);
   m3.getCANSparkMax().setIdleMode(IdleMode.kBrake);
   m4.getCANSparkMax().setIdleMode(IdleMode.kBrake);
-
   
   driveTrainEncoderL1 = m1.getCANSparkMax().getEncoder();
   driveTrainEncoderL2 = m2.getCANSparkMax().getEncoder();
@@ -77,16 +72,16 @@ public class driveTrain extends SubsystemBase {
 
 
   public void driveForwardWithEncoders(){
-  double sensorPosition =  -1 * driveTrainEncoderL1.getPosition() * kDriveTick2Feet;
+  double sensorPosition =  -1 * driveTrainEncoderL1.getPosition() * TecbotConstants.kDriveTick2Feet;
 
-  double error = setpoint - sensorPosition;
+  double error = TecbotConstants.setpoint - sensorPosition;
 
-  System.out.println("distance: " + setpoint);
+  System.out.println("distance: " + TecbotConstants.setpoint);
 
-  double outputSpeed = kP*error/setpoint;
+  double outputSpeed = TecbotConstants.kP*error/TecbotConstants.setpoint;
 
   SmartDashboard.putNumber("Drivetrain distance: ", sensorPosition);
-  SmartDashboard.putNumber("setpoint: ", setpoint);
+  SmartDashboard.putNumber("setpoint: ", TecbotConstants.setpoint);
   SmartDashboard.putNumber("error: ", error);
   SmartDashboard.putNumber("output speed: ", outputSpeed);
    
@@ -96,6 +91,26 @@ public class driveTrain extends SubsystemBase {
    m4.set(outputSpeed); 
   }
 
+  public void driveForwardWithEncodersShort(){
+    double sensorPosition =  driveTrainEncoderL1.getPosition() * TecbotConstants.kDriveTick2Feet;
+  
+    double error = TecbotConstants.setpointShort - sensorPosition;
+  
+    System.out.println("distance: " + TecbotConstants.setpoint);
+  
+    double outputSpeed = TecbotConstants.kP*error/TecbotConstants.setpoint;
+  
+    SmartDashboard.putNumber("Drivetrain distance: ", sensorPosition);
+    SmartDashboard.putNumber("setpoint: ", TecbotConstants.setpoint);
+    SmartDashboard.putNumber("error: ", error);
+    SmartDashboard.putNumber("output speed: ", outputSpeed);
+     
+     m1.set(-outputSpeed);
+     m2.set(-outputSpeed); 
+     m3.set(outputSpeed);
+     m4.set(outputSpeed); 
+    }
+
   public void resetEncoderDt(){
     driveTrainEncoderL1.setPosition(0);
     driveTrainEncoderL2.setPosition(0);
@@ -103,8 +118,12 @@ public class driveTrain extends SubsystemBase {
     driveTrainEncoderR2.setPosition(0);
   }  
 
-  public double getEncoder(){
-   return -1 * driveTrainEncoderL1.getPosition() * kDriveTick2Feet;
+  public double getDriveTrainFeet(){
+   return -1 * driveTrainEncoderL1.getPosition() * TecbotConstants.kDriveTick2Feet;
+  }
+  
+  public double getDriveTrainFeetR(){
+    return driveTrainEncoderR1.getPosition();
   }
 
   public void driveForward(){
@@ -115,10 +134,16 @@ public class driveTrain extends SubsystemBase {
   }
 
   public void driveBackwards(){
-     m1.set(RobotMap.chassisSpeedL);
-     m2.set(RobotMap.chassisSpeedL); 
-     m3.set(-RobotMap.chassisSpeedR);
-     m4.set(-RobotMap.chassisSpeedR); 
+    double sensorPositionBackWards = driveTrainEncoderL1.getPosition() * TecbotConstants.kDriveTick2Feet;
+
+    double error = TecbotConstants.setpointBakcwards - sensorPositionBackWards;
+
+    double outputSpeedBackwards = TecbotConstants.kP*error/TecbotConstants.setpointBakcwards;
+
+     m1.set(outputSpeedBackwards);
+     m2.set(outputSpeedBackwards); 
+     m3.set(-outputSpeedBackwards);
+     m4.set(-outputSpeedBackwards); 
     }
   
   
@@ -135,32 +160,38 @@ public class driveTrain extends SubsystemBase {
 //return t.get() >= sec;
  //}
   public void turnLeft(){
-    double sensorPostionTurn = driveTrainEncoderR1.getPosition();
+    double sensorPostionTurn = driveTrainEncoderL1.getPosition()*TecbotConstants.kDriveTick2Feet;
 
-    double errorTurn = setpointTurn - sensorPostionTurn;
+    double errorTurn = TecbotConstants.setpointTurn - sensorPostionTurn;
 
-    double outputSpeedTurn = kP*errorTurn/setpointTurn;
+    double outputSpeedTurn = TecbotConstants.kP*errorTurn/TecbotConstants.setpointTurn;
 
     SmartDashboard.putNumber("Encoder Position: ", sensorPostionTurn);
-    SmartDashboard.putNumber("setpoint: ", setpointTurn);
+    SmartDashboard.putNumber("setpoint: ", TecbotConstants.setpointTurn);
     SmartDashboard.putNumber("error: ", errorTurn);
     SmartDashboard.putNumber("output speed: ", outputSpeedTurn);
+
+    System.out.println("Encoder Position: " + sensorPostionTurn);
+    System.out.println("setpoint: " + TecbotConstants.setpointTurn);
+    System.out.println("error: " + errorTurn);
+    System.out.println("output speed: " + outputSpeedTurn);
     
-    m1.set(outputSpeedTurn);
-    m2.set(outputSpeedTurn); 
-    m3.set(outputSpeedTurn);
-    m4.set(outputSpeedTurn); 
+
+    //m1.set(outputSpeedTurn);
+    //m2.set(outputSpeedTurn); 
+    //m3.set(outputSpeedTurn);
+    //m4.set(outputSpeedTurn); 
   }
 
   public void turnRight(){
     double sensorPostionTurn = -1*driveTrainEncoderR1.getPosition();
 
-    double errorTurn = setpointTurnR - sensorPostionTurn;
+    double errorTurn = TecbotConstants.setpointTurnR - sensorPostionTurn;
 
-    double outputSpeedTurn = kP*errorTurn/setpointTurn;
+    double outputSpeedTurn = TecbotConstants.kP*errorTurn/TecbotConstants.setpointTurn;
 
     SmartDashboard.putNumber("Encoder Position: ", sensorPostionTurn);
-    SmartDashboard.putNumber("setpoint: ", setpointTurn);
+    SmartDashboard.putNumber("setpoint: ", TecbotConstants.setpointTurn);
     SmartDashboard.putNumber("error: ", errorTurn);
     SmartDashboard.putNumber("output speed: ", outputSpeedTurn);
     
@@ -199,6 +230,13 @@ public class driveTrain extends SubsystemBase {
   public void getAngle(){
   System.out.println(gyro.getAngle());
   SmartDashboard.putNumber("Angle: ", gyro.getAngle());
+  }
+
+  public void driveBackwardsTime(){
+m1.set(RobotMap.chassisSpeedL);
+m2.set(RobotMap.chassisSpeedL);
+m3.set(-RobotMap.chassisSpeedR);
+m4.set(-RobotMap.chassisSpeedR); 
   }
 }
 
